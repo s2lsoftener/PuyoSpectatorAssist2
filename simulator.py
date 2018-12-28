@@ -413,5 +413,4 @@ class BruteForcePop:
             matrix_data['chain_length'] = sim.chain_length
         return self
 
-
 settings = SimulatorSettings()
