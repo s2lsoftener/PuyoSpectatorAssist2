@@ -37,7 +37,7 @@ purple_BGR_data = []
 ojama_BGR_data = []
 
 # Rulue, blue, red, green, purple
-image = cv2.imread('test.png')
+image = cv2.imread('calibration_images/test.png')
 blue_puyos = [(1, 1), (1, 2), (1, 3), (1, 5), (1, 6),
               (2, 4), (3, 2), (3, 3), (3, 5), (3, 6),
               (4, 3), (4, 6)]
@@ -66,11 +66,64 @@ ojama_puyos = [(4, 6), (5, 3), (7, 1), (7, 2), (7, 5)]
 collectAvgBGR(image, ojama_puyos, 2, ojama_BGR_data)
 
 
-image = cv2.imread('rulue_yellow.png')
+image = cv2.imread('calibration_images/rulue_yellow.png')
 yellow_puyos = [(1, 4), (2, 4), (3, 3), (4, 3), (4, 6), (5, 6), (6, 4), (6, 6), (7, 5), (8, 4)]
 collectAvgBGR(image, yellow_puyos, 1, yellow_BGR_data)
 yellow_puyos = [(1, 5), (4, 1), (4, 6), (5, 2), (5, 6), (6, 2), (6, 6), (7, 4), (8, 1)]
 collectAvgBGR(image, yellow_puyos, 2, yellow_BGR_data)
+
+
+image = cv2.imread('calibration_images/amitie_witch.png')
+red_puyos = [(1, 3), (2, 2), (2, 3), (3, 4), (4, 3)]
+collectAvgBGR(image, red_puyos, 1, red_BGR_data)
+red_puyos = [(1, 3), (2, 1), (2, 4), (2, 5), (3, 1), (3, 2), (3, 5),
+             (5, 2), (5, 3), (5, 4), (6, 5), (8, 4), (9, 2), (9, 5),
+             (10, 2), (11, 2)]
+collectAvgBGR(image, red_puyos, 2, red_BGR_data)
+
+blue_puyos = [(3, 1), (3, 3), (3, 6), (4, 1), (4, 2), (4, 6),
+              (5, 6), (7, 6), (8, 6)]
+collectAvgBGR(image, blue_puyos, 1, blue_BGR_data)
+blue_puyos = [(2, 6), (3, 6), (4, 3), (4, 6), (6, 3), (6, 4), (7, 3), (7, 6),
+              (8, 1), (8, 2), (8, 6), (9, 1), (9, 3), (9, 6), (11, 1), (11, 6),
+              (12, 1), (12, 2)]
+collectAvgBGR(image, blue_puyos, 2, blue_BGR_data)
+
+yellow_puyos = [(1, 4), (1, 5), (2, 4), (3, 5), (4, 5), (5, 6)]
+collectAvgBGR(image, yellow_puyos, 1, yellow_BGR_data)
+yellow_puyos = [(1, 4), (1, 5), (1, 6), (2, 2), (3, 4), (4, 1), (4, 4), (4, 5),
+                (5, 1), (6, 1), (10, 1), (10, 5), (10, 6)]
+collectAvgBGR(image, yellow_puyos, 2, yellow_BGR_data)
+
+purple_puyos = [(1, 1), (1, 2), (1, 6), (2, 1), (2, 5), (2, 6), (3, 2),
+                (6, 1), (9, 6)]
+collectAvgBGR(image, purple_puyos, 1, purple_BGR_data)
+purple_puyos = [(1, 1), (1, 2), (2, 3), (3, 3), (5, 5), (5, 6), (6, 2), (6, 6),
+                (7, 1), (7, 2), (7, 5), (8, 5), (9, 4), (10, 3)]
+collectAvgBGR(image, purple_puyos, 2, purple_BGR_data)
+
+ojama_puyos = [(4, 2), (7, 4), (8, 3), (11, 3)]
+collectAvgBGR(image, ojama_puyos, 2, ojama_BGR_data)
+
+
+image = cv2.imread('calibration_images/amitie_witch_green.png')
+green_puyos = [(5, 5), (6, 6), (7, 4), (8, 5), (10, 5), (10, 6)]
+collectAvgBGR(image, green_puyos, 1, green_BGR_data)
+green_puyos = [(3, 1), (4, 2), (5, 4), (6, 2), (7, 1), (7, 2), (8, 5), (9, 3), (9, 5), (9, 6),
+               (11, 4), (11, 5), (11, 6)]
+collectAvgBGR(image, green_puyos, 2, green_BGR_data)
+
+ojama_puyos = [(1, 1), (1, 3), (2, 1), (2, 3), (2, 5), (3, 2), (3, 4), (3, 5), (3, 6),
+               (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (5, 2), (5, 4), (5, 6), (6, 1),
+               (6, 2), (7, 1), (7, 5), (8, 1), (8, 2), (8, 3), (9, 1)]
+collectAvgBGR(image, ojama_puyos, 1, ojama_BGR_data)
+ojama_puyos = [(1, 3), (1, 4), (2, 3), (2, 4), (2, 5), (2, 6), (3, 3), (3, 4), (3, 5), (3, 6),
+               (4, 3), (4, 4), (4, 5), (4, 6), (5, 5), (5, 6), (8, 1), (9, 1), (10, 1), (10, 2),
+               (11, 1), (12, 1)]
+collectAvgBGR(image, ojama_puyos, 2, ojama_BGR_data)
+
+
+
 
 
 red_avg_triplet = np.average(np.array(red_BGR_data), axis=0)
