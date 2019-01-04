@@ -1,3 +1,5 @@
+# Ignore this file, this is just me reading some stuff out of a book
+
 import numpy as np
 import argparse
 import cv2
@@ -13,9 +15,9 @@ image = cv2.imread(args['image'])
 
 # Find regions
 # Player 1 Board
-cv2.rectangle(image, (279, 160), (663, 880), (255, 0, 0), 1)
+cv2.rectangle(image, (279, 159), (663, 879), (255, 0, 0), 1)
 # Player 2 Board
-cv2.rectangle(image, (1256, 160), (1640, 880), (0, 0, 255), 1)
+cv2.rectangle(image, (1256, 159), (1640, 879), (0, 0, 255), 1)
 
 # cv2.imshow('Image', image)
 # cv2.waitKey(0)
@@ -114,3 +116,5 @@ print('\n\n')
 # cv2.imwrite('blue_puyo.jpg', crop_puyo)
 # cv2.waitKey(0)
 
+cv2.imshow('blue_puyo', bluepuyo)
+cv2.waitKey(0)

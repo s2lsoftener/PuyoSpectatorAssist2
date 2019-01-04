@@ -81,7 +81,7 @@ class ChainSimulator:
     leftover_NP -- leftover nuisance points from rounding after
                    dividing by target point.
     '''
-    def __init__(self, matrix, settings, auto = True):
+    def __init__(self, matrix, settings):
         self.matrix = matrix
         self.initial_matrix = copy.copy(matrix)
         self.settings = settings
@@ -94,7 +94,6 @@ class ChainSimulator:
         self.garbage_count = 0
         self.link_garbage_count = 0
         self.leftover_NP = 0
-        if auto is True: self.simulateChain()
 
     def applyGravity(self):
         matrix = np.transpose(self.matrix)
@@ -327,7 +326,7 @@ class ChainSimulator:
         while self.has_pops is not False: self.simulateLink()
         return self
     
-    def openURL(self):
+    def openURL(self, chain = 'initial'):
         convert = {'R': 4,
                'G': 7,
                'B': 5,
@@ -336,15 +335,18 @@ class ChainSimulator:
                'J': 1,
                '0': 0}
 
-        PN_matrix = copy.copy(self.matrix)
+        if chain == 'initial':
+            PN_matrix = copy.copy(self.initial_matrix)
+        elif chain == 'result':
+            PN_matrix = copy.copy(self.matrix)
 
         # Matrix dimensions
-        rows = self.matrix.shape[0]
-        cols = self.matrix.shape[1]
+        rows = PN_matrix.shape[0]
+        cols = PN_matrix.shape[1]
 
         for row in range(0, rows):
             for col in range(0, cols):
-                PN_matrix[row, col] = convert[str(self.matrix[row, col])]
+                PN_matrix[row, col] = convert[str(PN_matrix[row, col])]
 
         chaincode = str()
         for r in range(len(PN_matrix)):
