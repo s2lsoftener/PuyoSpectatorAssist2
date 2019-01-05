@@ -82,7 +82,7 @@ class ChainSimulator:
                    dividing by target point.
     '''
     def __init__(self, matrix, settings):
-        self.matrix = matrix
+        self.matrix = copy.copy(matrix)
         self.initial_matrix = copy.copy(matrix)
         self.settings = settings
         self.popping_groups = []

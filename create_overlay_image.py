@@ -3,6 +3,7 @@ import os
 from PIL import Image
 from mss import mss
 import cv2
+import copy
 from simulator import BruteForcePop, SimulatorSettings
 from scrape_matrix import scrapeMatrix
 
@@ -135,33 +136,41 @@ p1 = scrapeMatrix(screenshot, 1)
 print(p1)
 
 
-class ChainInfoOverlay():
-    def __init__(self):
+class ChainInfoOverlay:
+    def __init__(self, testmode = False):
         self.screenshot = None
         self.p1_matrix = [[]]
         self.p2_matrix = [[]]
         self.p1_chains = []
         self.p2_chains = []
+        self.settings = SimulatorSettings()
+        self.background = copy.copy(green_bg)
+        self.overlay = copy.copy(self.background)
+        self.testmode = testmode
 
     def captureScreen(self):
-        with mss() as sct:
-            # Get information of monitor 1
-            monitor_number = 1
-            mon = sct.monitors[monitor_number]
-
-            # The screen part to capture
-            monitor = {
-                "top": -1080,
-                "left": -960,
-                "width": 1920,
-                "height": 1080,
-                "mon": monitor_number,
-            }
-
-            # Take screenshot and save to self.screenshot
-            sct_img = sct.grab(monitor)
-            PIL_img = Image.frombytes('RGB', sct_img.size, sct_img.bgra, 'raw', 'BGRX')
+        if self.testmode == True:
+            PIL_img = Image.open('calibration_images/lagnus2.png')
             self.screenshot = cv2.cvtColor(np.array(PIL_img), cv2.COLOR_RGB2BGR)
+        else:
+            with mss() as sct:
+                # Get information of monitor 1
+                monitor_number = 1
+                mon = sct.monitors[monitor_number]
+
+                # The screen part to capture
+                monitor = {
+                    "top": -1080,
+                    "left": -960,
+                    "width": 1920,
+                    "height": 1080,
+                    "mon": monitor_number,
+                }
+
+                # Take screenshot and save to self.screenshot
+                sct_img = sct.grab(monitor)
+                PIL_img = Image.frombytes('RGB', sct_img.size, sct_img.bgra, 'raw', 'BGRX')
+                self.screenshot = cv2.cvtColor(np.array(PIL_img), cv2.COLOR_RGB2BGR)
         return self
     
     def scrapeMatrices(self):
@@ -170,5 +179,37 @@ class ChainInfoOverlay():
         return self
     
     def analyzePops(self):
-        
+        self.p1_chains = BruteForcePop(self.p1_matrix, self.settings, print_result=False).popping_matrices
+        self.p2_chains = BruteForcePop(self.p2_matrix, self.settings, print_result=False).popping_matrices
+        return self
+    
+    def createOverlay(self):
+        self.overlay = copy.copy(self.background)
 
+        # Player 1
+        for chain in self.p1_chains:
+            start_x = 279
+            start_y = 159
+
+            x = start_x + 64 * chain['col']
+            y = start_y + 60 * chain['row']
+
+            self.overlay.paste(reticules[chain['color']], (x, y), reticules[chain['color']])
+            self.overlay.paste(numbers[str(chain['chain_length'])], (x, y), numbers[str(chain['chain_length'])])
+        
+        # Player 2
+        for chain in self.p2_chains:
+            start_x = 1256
+            start_y = 159
+
+            x = start_x + 64 * chain['col']
+            y = start_y + 60 * chain['row']
+
+            self.overlay.paste(reticules[chain['color']], (x, y), reticules[chain['color']])
+            self.overlay.paste(numbers[str(chain['chain_length'])], (x, y), numbers[str(chain['chain_length'])])
+        
+        return self
+
+test = ChainInfoOverlay(testmode = True)
+test.captureScreen().scrapeMatrices().analyzePops().createOverlay()
+test.overlay.show()
