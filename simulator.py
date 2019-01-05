@@ -22,7 +22,7 @@ test_matrix2 = np.asarray([['0', '0', '0', '0', '0', '0'],
                            ['0', '0', '0', '0', '0', '0'],
                            ['0', '0', '0', '0', '0', '0'],
                            ['0', '0', '0', '0', '0', '0'],
-                           ['J', '0', 'Y', '0', '0', 'R'],
+                           ['J', '0', '0', '0', '0', 'R'],
                            ['J', '0', '0', '0', '0', 'R'],
                            ['B', 'G', '0', '0', '0', 'R'],
                            ['G', 'Y', 'Y', '0', 'R', 'Y'],
@@ -361,10 +361,11 @@ class BruteForcePop:
     def __init__(self, matrix, settings, auto = True, print_result = True):
         self.matrix = copy.copy(matrix)
         self.settings = settings
-        self.matrices = []
+        self.test_matrices = []
+        self.popping_matrices = []
         if auto is True:
             self.generateMatrices().simulateMatrices()
-            if print_result is True: print(self.matrices)
+            if print_result is True: print(self.popping_matrices)
 
     def generateMatrices(self):
         # Add a single Puyo of each color in each column
@@ -377,12 +378,15 @@ class BruteForcePop:
                     row_matrix = np.transpose(copy.copy(matrix))
                     row = len(row_matrix[col][row_matrix[col] == '0'])
 
-                    # Add data to self.matrices
+                    # Add data to self.test_matrices
                     matrix[0, col] = color
-                    self.matrices.append({
+                    self.test_matrices.append({
                         'matrix': matrix,
+                        'color': color,
                         'row': row - 1,
-                        'col': col
+                        'col': col,
+                        'score': 0,
+                        'chain_length:': 0
                     })
         
         # Add a double Puyo of each color in each column
@@ -395,9 +399,9 @@ class BruteForcePop:
                     row_matrix = np.transpose(copy.copy(matrix))
                     row = len(row_matrix[col][row_matrix[col] == '0'])
 
-                    # Add data to self.matrices
+                    # Add data to self.test_matrices
                     matrix[0:2, col] = color
-                    self.matrices.append({
+                    self.test_matrices.append({
                         'matrix': matrix,
                         'color': color,
                         'row': row - 1,
@@ -408,11 +412,13 @@ class BruteForcePop:
         return self
 
     def simulateMatrices(self):
-        for matrix_data in self.matrices:
+        for matrix_data in self.test_matrices:
             matrix = copy.copy(matrix_data['matrix'])
-            sim = ChainSimulator(matrix, self.settings)
+            sim = ChainSimulator(matrix, self.settings).simulateChain()
             matrix_data['score'] = sim.score
             matrix_data['chain_length'] = sim.chain_length
+            if matrix_data['chain_length'] >= 2:
+                self.popping_matrices.append(matrix_data)
         return self
 
 settings = SimulatorSettings()

@@ -194,6 +194,82 @@ collectAvgBGR(image, yellow_puyos, 2, yellow_BGR_data, 'yellow', filename)
 # collectAvgBGR(image, ojama_puyos, 1, ojama_BGR_data, 'ojama', filename)
 
 
+filename = 'lagnus.png'
+image = cv2.imread('calibration_images/' + filename)
+green_puyos = [(1, 5), (4, 1), (4, 2), (4, 6), (5, 1), (6, 2)]
+collectAvgBGR(image, green_puyos, 1, green_BGR_data, 'green', filename)
+green_puyos = [(1, 4), (2, 1), (2, 2), (3, 1), (4, 4), (4, 6), (5, 1), (5, 6)]
+collectAvgBGR(image, green_puyos, 2, green_BGR_data, 'green', filename)
+
+blue_puyos = [(2, 1), (2, 2), (3, 1), (3, 4), (6, 1)]
+collectAvgBGR(image, blue_puyos, 1, blue_BGR_data, 'blue', filename)
+blue_puyos = [(1, 6), (2, 6), (3, 4), (3, 5), (6, 1), (8, 6), (9, 6)]
+collectAvgBGR(image, blue_puyos, 2, blue_BGR_data, 'blue', filename)
+
+
+filename = 'lagnus2.png'
+image = cv2.imread('calibration_images/' + filename)
+red_puyos = [(1, 5), (2, 6), (3, 5), (4, 5), (5, 1), (5, 2), (5, 3)]
+collectAvgBGR(image, red_puyos, 1, red_BGR_data, 'red', filename)
+red_puyos = [(1, 4), (1, 5), (2, 6), (3, 5), (6, 3)]
+collectAvgBGR(image, red_puyos, 2, red_BGR_data, 'red', filename)
+
+yellow_puyos = [(1, 4), (2, 5), (3, 1), (3, 2), (3, 4), (4, 1), (4, 4), (6, 1)]
+collectAvgBGR(image, yellow_puyos, 1, yellow_BGR_data, 'yellow', filename)
+yellow_puyos = [(1, 3), (2, 4), (2, 5), (3, 3), (4, 3), (5, 3)]
+collectAvgBGR(image, yellow_puyos, 2, yellow_BGR_data, 'yellow', filename)
+
+blue_puyos = [(1, 6), (2, 1), (2, 2), (2, 3), (3, 6), (4, 2), (4, 6), (5, 4),
+              (5, 6), (6, 3)]
+collectAvgBGR(image, blue_puyos, 1, blue_BGR_data, 'blue', filename)
+blue_puyos = [(1, 6), (3, 4), (3, 6), (4, 6)]
+collectAvgBGR(image, blue_puyos, 2, blue_BGR_data, 'blue', filename)
+
+purple_puyos = [(1, 1), (1, 2), (1, 3), (2, 4), (3, 3), (4, 3), (5, 5), (6, 6),
+                (7, 1)]
+collectAvgBGR(image, purple_puyos, 1, purple_BGR_data, 'purple', filename)
+purple_puyos = [(1, 1), (1, 2), (2, 1), (2, 2), (2, 3), (4, 4)]
+collectAvgBGR(image, purple_puyos, 2, purple_BGR_data, 'purple', filename)
+
+
+filename = 'ringo_ss_1.png'
+image = cv2.imread('calibration_images/' + filename)
+red_puyos = [(1, 6), (2, 6), (3, 1), (4, 1), (5, 1), (6, 3), (7, 1), (7, 3), (8, 3)]
+collectAvgBGR(image, red_puyos, 1, red_BGR_data, 'red', filename)
+red_puyos = [(2, 6), (3, 6), (7, 6), (10, 5)]
+collectAvgBGR(image, red_puyos, 2, red_BGR_data, 'red', filename)
+
+yellow_puyos = [(1, 4), (3, 3), (6, 4)]
+collectAvgBGR(image, yellow_puyos, 1, yellow_BGR_data, 'yellow', filename)
+yellow_puyos = [(1, 4), (1, 5), (1, 6), (6, 1), (7, 1), (8, 6), (9, 6)]
+collectAvgBGR(image, yellow_puyos, 2, yellow_BGR_data, 'yellow', filename)
+
+ojama_puyos = [(1, 5), (2, 4), (2, 5), (3, 2), (3, 4), (3, 5), (3, 6),
+               (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (5, 2), (5, 3), (5, 4), (5, 6),
+               (6, 2), (9, 1), (10, 1), (11, 1), (12, 1)]
+collectAvgBGR(image, ojama_puyos, 1, ojama_BGR_data, 'ojama', filename)
+ojama_puyos = [(1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3),
+               (4, 1), (4, 2), (5, 1), (6, 6), (7, 5), (8, 5), (9, 5)]
+collectAvgBGR(image, ojama_puyos, 2, ojama_BGR_data, 'ojama', filename)
+
+
+filename = 'ringo_ss_2.png'
+image = cv2.imread('calibration_images/' + filename)
+ojama_puyos = [(1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3), (2, 4), (3, 1), (3, 2), (3, 3), (3, 4),
+               (4, 1), (4, 2), (4, 3), (4, 4), (5, 1), (5, 2)]
+collectAvgBGR(image, ojama_puyos, 1, ojama_BGR_data, 'ojama', filename)
+ojama_puyos = [(1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3),
+               (4, 1), (4, 2), (4, 3), (5, 1), (5, 5), (6, 1), (6, 5), (7, 1), (7, 2), (7, 6)]
+collectAvgBGR(image, ojama_puyos, 2, ojama_BGR_data, 'ojama', filename)
+
+green_puyos = [(3, 5), (5, 3), (5, 4), (5, 5), (6, 3), (8, 1), (8, 4), (9, 1)]
+collectAvgBGR(image, green_puyos, 1, green_BGR_data, 'green', filename)
+green_puyos = [(2, 4), (3, 4), (5, 2), (5, 3), (7, 3), (8, 4), (10, 2), (11, 2)]
+collectAvgBGR(image, green_puyos, 2, green_BGR_data, 'green', filename)
+
+
+
+
 red_avg_triplet = np.average(np.array(red_BGR_data), axis=0)
 red_min_triplet = np.min(np.array(red_BGR_data), axis=0)
 red_max_triplet = np.max(np.array(red_BGR_data), axis=0)
