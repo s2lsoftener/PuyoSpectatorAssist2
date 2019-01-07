@@ -87,55 +87,6 @@ numbers = {
     '19': omg
 }
 
-# Get bruteforcepops
-# Player 1
-test_result = BruteForcePop(test_matrix, settings, print_result=False).popping_matrices
-for result in test_result:
-    row = result['row']
-    col = result['col']
-    color = result['color']
-    chain_length = result['chain_length']
-
-    start_x = 279
-    start_y = 159
-
-    x = start_x + 64 * col
-    y = start_y + 60 * row
-
-    green_bg.paste(reticules[color], (x, y), reticules[color])
-    green_bg.paste(numbers[str(chain_length)], (x, y), numbers[str(chain_length)])
-
-# green_bg.show()
-
-def captureScreen():
-    with mss() as sct:
-        # Get information of monitor 1
-        monitor_number = 1
-        mon = sct.monitors[monitor_number]
-
-        # The screen part to capture
-        monitor = {
-            "top": -1080,
-            "left": -960,
-            "width": 1920,
-            "height": 1080,
-            "mon": monitor_number,
-        }
-
-        # Grab the data
-        sct_img = sct.grab(monitor)
-        
-        # Convert to PIL image
-        PIL_img = Image.frombytes('RGB', sct_img.size, sct_img.bgra, 'raw', 'BGRX')
-        PIL_img.save('calibration_images/ringo_ss_2.png')
-        return cv2.cvtColor(np.array(PIL_img), cv2.COLOR_RGB2BGR)
-
-
-screenshot = captureScreen()
-p1 = scrapeMatrix(screenshot, 1)
-print(p1)
-
-
 class ChainInfoOverlay:
     def __init__(self, testmode = False):
         self.screenshot = None
@@ -209,7 +160,3 @@ class ChainInfoOverlay:
             self.overlay.paste(numbers[str(chain['chain_length'])], (x, y), numbers[str(chain['chain_length'])])
         
         return self
-
-test = ChainInfoOverlay(testmode = True)
-test.captureScreen().scrapeMatrices().analyzePops().createOverlay()
-test.overlay.show()

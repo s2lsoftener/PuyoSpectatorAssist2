@@ -29,7 +29,6 @@ def guessColor(puyo_img, limits):
     circle_mask = np.zeros((height, width), np.uint8)
     cv2.circle(circle_mask, (width // 2, height // 2), height // 2, (255, 255, 255), -1)
     avg_color = cv2.mean(puyo_img, mask=circle_mask)[:3]
-    print(avg_color)
 
     color = ''
     if (avg_color[0] > limits['red']['lower'][0] and avg_color[0] < limits['red']['upper'][0] and
@@ -59,7 +58,6 @@ def guessColor(puyo_img, limits):
     else:
         color = '0'
     
-    print(color)
     return(color)
 
 def scrapeMatrix(screenshot, player_num):
