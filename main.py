@@ -23,7 +23,7 @@ class PuyoSpectatorAssist(tk.Tk):
         else:
             self.displayCanvas.config(image=self.test_image)
 
-        self.after(1000, self.changeOverlay)
+        self.after(1, self.changeOverlay)
     
     def run(self):
         self.mainloop()
