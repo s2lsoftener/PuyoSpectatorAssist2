@@ -5,7 +5,7 @@ from PIL import ImageTk, Image
 class PuyoSpectatorAssist(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
-        self.overlay_maker = ChainInfoOverlay(testmode=True)
+        self.overlay_maker = ChainInfoOverlay(testmode=False)
         self.overlay_image = ImageTk.PhotoImage(file='img/green_bg.png')
         self.displayCanvas = tk.Label(self)
         self.displayCanvas.pack()
@@ -13,17 +13,20 @@ class PuyoSpectatorAssist(tk.Tk):
         self.ticker = 0
     
     def changeOverlay(self):
-        print('Running')
-        self.ticker += 1
+        # print('Running')
+        # self.ticker += 1
 
-        if self.ticker % 2 == 0:
-            image = self.overlay_maker.captureScreen().scrapeMatrices().analyzePops().createOverlay().overlay
-            self.overlay_image = ImageTk.PhotoImage(image)
-            self.displayCanvas.config(image=self.overlay_image)
-        else:
-            self.displayCanvas.config(image=self.test_image)
+        # if self.ticker % 2 == 0:
+        #     image = self.overlay_maker.captureScreen().scrapeMatrices().analyzePops().createOverlay().overlay
+        #     self.overlay_image = ImageTk.PhotoImage(image)
+        #     self.displayCanvas.config(image=self.overlay_image)
+        # else:
+        #     self.displayCanvas.config(image=self.test_image)
+        image = self.overlay_maker.captureScreen().scrapeMatrices().analyzePops().createOverlay().overlay
+        self.overlay_image = ImageTk.PhotoImage(image)
+        self.displayCanvas.config(image=self.overlay_image)
 
-        self.after(1, self.changeOverlay)
+        self.after(34, self.changeOverlay)
     
     def run(self):
         self.mainloop()

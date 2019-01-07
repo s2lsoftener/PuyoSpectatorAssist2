@@ -143,7 +143,7 @@ class ChainInfoOverlay:
             start_y = 159
 
             x = start_x + 64 * chain['col']
-            y = start_y + 60 * chain['row']
+            y = start_y + 60 * (chain['row'] - 1)
 
             self.overlay.paste(reticules[chain['color']], (x, y), reticules[chain['color']])
             self.overlay.paste(numbers[str(chain['chain_length'])], (x, y), numbers[str(chain['chain_length'])])
@@ -154,7 +154,7 @@ class ChainInfoOverlay:
             start_y = 159
 
             x = start_x + 64 * chain['col']
-            y = start_y + 60 * chain['row']
+            y = start_y + 60 * (chain['row'] - 1)
 
             self.overlay.paste(reticules[chain['color']], (x, y), reticules[chain['color']])
             self.overlay.paste(numbers[str(chain['chain_length'])], (x, y), numbers[str(chain['chain_length'])])
