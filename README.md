@@ -9,8 +9,13 @@ You'll need an extra 1920x1080 monitor for this tool to work. I haven't gotten a
 Download Python 3.7+ and add it to your environment variables.
 https://www.python.org/downloads/
 
-## 2. Clone the repository
+## 2. Clone the repository, install packages
 You can do that with git or by downloading it from this page
+
+Install the package dependencies with:
+```bash
+pip install -r requirements.txt
+```
 
 ## 3. Open OBS and find your monitor coordinates
 Right click your capture card source and find Fullscreen Projector > the display you'll end up projecting to. 
@@ -56,5 +61,4 @@ You can also add a Color Correction filter to edit the source's opacity. That wa
 
 # To Do
 * Create GUI tool for choosing your screen region.
-* Currently, the tool checks for chains every 2 frames, so it gets visually annoying. Make the tool only check for chains after each piece placement.
-* Package the tool somehow so people don't need their own Python installations? What do people use for this?
+* Package the tool so people don't need to have their own Python installations
