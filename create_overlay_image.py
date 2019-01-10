@@ -92,12 +92,15 @@ class ChainInfoOverlay:
         self.screenshot = None
         self.p1_matrix = [[]]
         self.p2_matrix = [[]]
-        self.p1_chains = []
-        self.p2_chains = []
+        self.p1_analysis = None
+        self.p2_analysis = None
         self.settings = SimulatorSettings()
         self.background = copy.copy(green_bg)
         self.overlay = copy.copy(self.background)
         self.testmode = testmode
+        self.display_p1 = True
+        self.display_p2 = True
+
 
     def captureScreen(self):
         if self.testmode == True:
@@ -129,34 +132,40 @@ class ChainInfoOverlay:
         self.p2_matrix = scrapeMatrix(self.screenshot, 2)
         return self
     
-    def analyzePops(self):
-        self.p1_chains = BruteForcePop(self.p1_matrix, self.settings, print_result=False).popping_matrices
-        self.p2_chains = BruteForcePop(self.p2_matrix, self.settings, print_result=False).popping_matrices
+    def analyzePops(self):     
+        self.p1_analysis = BruteForcePop(self.p1_matrix, self.settings, print_result=False)
+        self.p2_analysis = BruteForcePop(self.p2_matrix, self.settings, print_result=False)
+
+        if self.p1_analysis.already_popping is True: self.display_p1 = False
+        if self.p2_analysis.already_popping is True: self.display_p2 = False
+
         return self
     
     def createOverlay(self):
         self.overlay = copy.copy(self.background)
 
         # Player 1
-        for chain in self.p1_chains:
-            start_x = 279
-            start_y = 159
+        if self.display_p1 is True:
+            for chain in self.p1_analysis.popping_matrices:
+                start_x = 279
+                start_y = 159
 
-            x = start_x + 64 * chain['col']
-            y = start_y + 60 * (chain['row'] - 1)
+                x = start_x + 64 * chain['col']
+                y = start_y + 60 * (chain['row'] - 1)
 
-            self.overlay.paste(reticules[chain['color']], (x, y), reticules[chain['color']])
-            self.overlay.paste(numbers[str(chain['chain_length'])], (x, y), numbers[str(chain['chain_length'])])
+                self.overlay.paste(reticules[chain['color']], (x, y), reticules[chain['color']])
+                self.overlay.paste(numbers[str(chain['chain_length'])], (x, y), numbers[str(chain['chain_length'])])
         
         # Player 2
-        for chain in self.p2_chains:
-            start_x = 1256
-            start_y = 159
+        if self.display_p2 is True:
+            for chain in self.p2_analysis.popping_matrices:
+                start_x = 1256
+                start_y = 159
 
-            x = start_x + 64 * chain['col']
-            y = start_y + 60 * (chain['row'] - 1)
+                x = start_x + 64 * chain['col']
+                y = start_y + 60 * (chain['row'] - 1)
 
-            self.overlay.paste(reticules[chain['color']], (x, y), reticules[chain['color']])
-            self.overlay.paste(numbers[str(chain['chain_length'])], (x, y), numbers[str(chain['chain_length'])])
+                self.overlay.paste(reticules[chain['color']], (x, y), reticules[chain['color']])
+                self.overlay.paste(numbers[str(chain['chain_length'])], (x, y), numbers[str(chain['chain_length'])])
         
         return self
