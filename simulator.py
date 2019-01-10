@@ -363,6 +363,7 @@ class BruteForcePop:
         self.settings = settings
         self.test_matrices = []
         self.popping_matrices = []
+        self.already_popping = False
         if auto is True:
             self.generateMatrices().simulateMatrices()
             if print_result is True: print(self.popping_matrices)
@@ -371,7 +372,9 @@ class BruteForcePop:
         # Check if matrix is already popping.
         # Don't continue with rest of function if it is.
         test_matrix = ChainSimulator(self.matrix, self.settings).simulateChain()
-        if test_matrix.chain_length > 0: return self
+        if test_matrix.chain_length > 0:
+            self.already_popping = True
+            return self
         
         # Add a single Puyo of each color in each column
         for color in self.settings.puyo_colors:
